@@ -1,4 +1,4 @@
-// @import "enhanced_fonts"; // for when you need special font features 
+// @import "enhanced_fonts"; // for when you need special font features
 @import "fonts";
 @import "mq";
 @import "palette";
@@ -6,8 +6,8 @@
 // @import "full_immersive_enhancer"; // full-width enhancer, to be used with immersive weighting. Removes left colum, sets 100vw atom width at any breakpoint
 
 .interactive-atom {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 // uncomment to test
 // .gv-wrapper {
@@ -18,26 +18,549 @@
 //     border-bottom: 1px solid #dcdcdc;
 // }
 
+$headerHeight: 80vh;
+$primaryColor: #0f1629;
+$secondaryColor: #f79e1b;
+$cultureColor: #a1845c;
+
+.element.element-atom {
+  padding: 0;
+}
+
+.element-inline {
+  max-width: 620px;
+  transition: all 1s ease;
+  // &.fadeMeIn {
+  //   opacity: 1;
+  //   transform: translateY(0);
+  // }
+}
+
+#maincontent,
+.content__main-column--interactive {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.content__main-column--interactive,
+.article--standard {
+  .element.element-atom + p {
+    &::first-letter {
+      float: left;
+      font-family: $f-serif-headline;
+      font-size: 119px;
+      line-height: 0.8;
+      font-weight: 300;
+      float: left;
+      text-transform: uppercase;
+      margin-right: 4px;
+      color: $cultureColor;
+    }
+  }
+  hr + p {
+    &::first-letter {
+      float: left;
+      font-family: $f-serif-headline;
+      font-size: 119px;
+      line-height: 0.8;
+      font-weight: 300;
+      float: left;
+      text-transform: uppercase;
+      margin-right: 4px;
+      color: $cultureColor;
+    }
+  }
+}
+
+article.content--interactive {
+  & > div {
+    border-left: none;
+    border-right: none;
+  }
+  @include mq(desktop) {
+    &:before {
+      content: "";
+      background-color: $primaryColor;
+      width: 100%;
+      height: $headerHeight;
+      position: absolute;
+      z-index: 2;
+    }
+  }
+  .content--interactive {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      background-image: url("https://media.guim.co.uk/2f03d977d3df796711169b130408f41b283d5f0f/582_2517_6270_8522/736.jpg");
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+      display: block;
+      height: $headerHeight;
+      background-position: center;
+      margin-top: 0;
+      z-index: 3;
+      width: calc(100% + 20px);
+      margin-left: -10px;
+      top: 0;
+      @include mq(mobileLandscape) {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+      }
+      @include mq(desktop) {
+        top: unset;
+        margin-left: 319px;
+        width: calc(1140px - 501px);
+      }
+      @include mq(leftCol) {
+        margin-left: 479px;
+        width: calc(1140px - 501px);
+      }
+      @include mq(wide) {
+        margin-left: 559px;
+        width: calc(1300px - 580px);
+      }
+    }
+  }
+}
+
+[data-gu-name="title"],
+.article-kicker,
+[data-gu-name="headline"],
+.headline,
+[data-gu-name="standfirst"],
+.standfirst {
+  z-index: 4;
+}
+
+[data-gu-name="title"],
+.article-kicker {
+  display: none;
+  @include mq(desktop) {
+    margin-top: $headerHeight;
+    a {
+      font-size: 20px;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+[data-gu-name="headline"],
+.headline {
+  position: relative;
+  align-items: baseline;
+  // margin-top: calc(#{$headerHeight} + 43px);
+  // margin-top: calc(#{$headerHeight} - 265px);
+  margin-top: calc(#{$headerHeight} - 118px);
+  margin-top: calc(#{$headerHeight} - 158px);
+  @include mq(desktop) {
+    margin-top: unset;
+  }
+  @include mq(desktop) {
+    position: absolute;
+    margin-top: calc(#{$headerHeight} / 2);
+    transform: translateY(-50%);
+    max-width: 170px;
+  }
+  @include mq(leftCol) {
+    left: 160px;
+  }
+  @include mq(wide) {
+    left: 240px;
+  }
+  &:before {
+    content: "";
+    background-image: url("<%= path %>/playing-with-fire-mobile.svg");
+    background-position: top left;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 170px;
+    height: 110px;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    opacity: 0;
+    animation: fadeIn 1s ease;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    z-index: 3;
+    @include mq(mobileMedium) {
+      width: 210px;
+      height: 125px;
+    }
+    @include mq(tablet) {
+      width: 230px;
+      height: 137px;
+    }
+    @include mq(leftCol) {
+      width: 410px;
+      height: 280px;
+      top: -10px;
+      left: -142px;
+      background-image: url("<%= path %>/playing-with-fire-desktop.svg");
+    }
+  }
+  h1 {
+    color: white;
+    font-size: 20px;
+    font-weight: 200;
+    position: sticky;
+    bottom: 0;
+
+    padding-bottom: 20px;
+
+    @include mq(tablet) {
+      padding-right: 110px;
+      padding-bottom: 28px;
+    }
+    @include mq(desktop) {
+      padding-right: unset;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      display: block;
+
+      height: 200px;
+      top: -204px;
+      z-index: 0;
+      background: linear-gradient(to top, $primaryColor 0%, transparent 100%);
+      left: -10px;
+      width: calc(100% + 20px);
+      @include mq(mobileLandscape) {
+        left: -20px;
+        width: calc(100% + 40px);
+      }
+      @include mq(tablet) {
+        width: calc(100% + 60px);
+      }
+    }
+
+    &:after {
+      content: "";
+      width: calc(100% + 20px);
+      height: calc(100% + 24px);
+      background-color: $primaryColor;
+      z-index: -1;
+      position: absolute;
+      left: -10px;
+      top: -4px;
+      @include mq(mobileLandscape) {
+        width: calc(100% + 40px);
+        left: -20px;
+      }
+      @include mq(tablet) {
+        width: calc(100% + 60px);
+      }
+    }
+    @include mq(desktop) {
+      padding-bottom: unset;
+      &::first-line {
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+[data-gu-name="border"] {
+  z-index: 0;
+}
+[data-gu-name="standfirst"],
+.standfirst {
+  margin-bottom: 20px;
+  @include mq(tablet) {
+    margin-top: -10px;
+  }
+  @include mq(desktop) {
+    margin-top: calc(#{$headerHeight} + 4px);
+  }
+  // @include mq(wide) {
+  //   margin-top: -24px;
+  // }
+  .content__standfirst {
+    p {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 115%;
+      &:after {
+        content: "Photography by Derek Shapton";
+        display: block;
+        margin-top: 10px;
+      }
+      a:hover {
+        color: $cultureColor;
+        border-bottom: solid 1px $cultureColor;
+      }
+    }
+  }
+}
+
+[data-gu-name="meta"] {
+  address {
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+blockquote {
+  margin: 6px 10px 0 0 !important;
+  width: 45%;
+  @include mq(tablet) {
+    width: 220px;
+    margin: 6px 20px 0 0 !important;
+  }
+  p {
+    font-style: normal;
+    font-family: $f-serif-headline;
+    font-size: 1.25rem;
+    line-height: 1.15;
+    font-weight: 700;
+    &:before {
+      content: "";
+      width: 1.2em;
+      height: 0.85em;
+      background-image: url("<%= path %>/quote-marks.svg");
+      display: inline-block;
+      position: relative;
+      background-position: top left;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin-right: 2px;
+      margin-bottom: -1px;
+    }
+  }
+
+  padding-left: 10px;
+  padding-right: 10px;
+  clear: left;
+  float: left;
+
+  line-height: 25px;
+  position: relative;
+  background-color: #f6f6f6;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 12px;
+  // color: #6b5840;
+}
+
+p + .element [name="EmbedBlockComponent"] {
+  display: block;
+  max-width: 620px;
+  iframe {
+    min-height: 60px;
+  }
+}
 
 /*----- App fixes -----*/
-.ios, .android {
-    .element--immersive {
-        @include mq($until: tablet) {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw !important;
-            margin-right: -50vw;
+.ios,
+.android {
+  .element--immersive {
+    @include mq($until: tablet) {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw !important;
+      margin-right: -50vw;
+    }
+    @include mq(tablet) {
+      transform: translateX(-20px);
+      width: calc(100% + 60px);
+    }
+  }
+
+  .article--standard {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      background-image: url("https://media.guim.co.uk/2f03d977d3df796711169b130408f41b283d5f0f/0_0_6852_11039/1241.jpg");
+      background-image: url("https://media.guim.co.uk/2f03d977d3df796711169b130408f41b283d5f0f/582_2517_6270_8522/736.jpg");
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+      display: block;
+      height: $headerHeight;
+      background-position: center;
+      margin-top: 0;
+      z-index: 3;
+      width: calc(100% + 20px);
+      margin-left: -10px;
+      top: 0;
+      @include mq(mobileLandscape) {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+      }
+      @include mq(desktop) {
+        top: unset;
+        margin-left: 319px;
+        width: calc(1140px - 501px);
+      }
+      @include mq(leftCol) {
+        margin-left: 479px;
+        width: calc(1140px - 501px);
+      }
+      @include mq(wide) {
+        margin-left: 559px;
+        width: calc(1300px - 580px);
+      }
+    }
+  }
+  .article__header {
+    position: relative;
+    align-items: baseline;
+    margin-top: calc(90vh - 118px);
+    @include mq(desktop) {
+      margin-top: unset;
+    }
+    @include mq(desktop) {
+      position: absolute;
+      margin-top: calc(#{$headerHeight} / 2);
+      transform: translateY(-50%);
+      max-width: 170px;
+    }
+    @include mq(leftCol) {
+      left: 160px;
+    }
+    @include mq(wide) {
+      left: 240px;
+    }
+    &:before {
+      content: "";
+      background-image: url("<%= path %>/playing-with-fire-mobile.svg");
+      background-position: top left;
+      background-repeat: no-repeat;
+      position: relative;
+      width: 170px;
+      height: 110px;
+      top: 0;
+      left: 10px;
+      display: inline-block;
+      opacity: 0;
+      animation: fadeIn 1s ease;
+      animation-delay: 0.5s;
+      animation-fill-mode: forwards;
+      z-index: 31;
+      @include mq(tablet) {
+        width: 230px;
+        height: 137px;
+      }
+      @include mq(leftCol) {
+        width: 410px;
+        height: 280px;
+        top: -10px;
+        left: -142px;
+        background-image: url("<%= path %>/playing-with-fire-desktop.svg");
+      }
+    }
+  }
+
+  .article--standard {
+    @include mq(desktop) {
+      &:before {
+        content: "";
+        background-color: $primaryColor;
+        width: 100%;
+        height: $headerHeight;
+        position: absolute;
+        z-index: 2;
+      }
+    }
+
+    .headline {
+      color: white;
+      font-size: 20px;
+      font-weight: 200;
+      position: sticky;
+      bottom: 0;
+      line-height: 115%;
+
+      padding-bottom: 12px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+
+        height: 200px;
+        top: -204px;
+        z-index: 0;
+        background: linear-gradient(to top, $primaryColor 0%, transparent 100%);
+        left: -10px;
+        width: calc(100% + 20px);
+        @include mq(mobileLandscape) {
+          left: -20px;
+          width: calc(100% + 40px);
         }
         @include mq(tablet) {
-            transform: translateX(-20px);
-            width: calc(100% + 60px);
+          width: calc(100% + 60px);
         }
+      }
+
+      &:after {
+        content: "";
+        width: calc(100% + 20px);
+        height: calc(100% + 24px);
+        background-color: $primaryColor;
+        z-index: -1;
+        position: absolute;
+        left: -10px;
+        top: -4px;
+        @include mq(mobileLandscape) {
+          width: calc(100% + 40px);
+          left: -20px;
+        }
+        @include mq(tablet) {
+          width: calc(100% + 60px);
+        }
+      }
+      @include mq(desktop) {
+        padding-bottom: unset;
+        &::first-line {
+          font-weight: 700;
+        }
+      }
     }
-    
+
+    .standfirst {
+      margin-top: 24px;
+      p {
+        font-size: 20px;
+        font-weight: 200;
+        line-height: 115%;
+        &:after {
+          content: "Photography by Derek Shapton";
+          display: block;
+          margin-top: 10px;
+        }
+      }
+    }
+    .meta__byline {
+      visibility: hidden;
+      height: 0;
+    }
+
+    .avatar--author {
+      display: none;
+    }
+
     //remove dark mode padding in apps
-    figure.element.element-atom, figure.interactive.interactive-atom.interactive--loading {
-        padding: 0 !important;
+    figure.element.element-atom,
+    figure.interactive.interactive-atom.interactive--loading {
+      padding: 0 !important;
     }
+  }
 }
