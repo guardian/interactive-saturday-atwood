@@ -422,7 +422,7 @@ p + .element [name="EmbedBlockComponent"] {
   .article__header {
     position: relative;
     align-items: baseline;
-    margin-top: calc(90vh - 118px);
+    margin-top: calc(80vh - 118px);
     @include mq(desktop) {
       margin-top: unset;
     }
@@ -561,6 +561,19 @@ p + .element [name="EmbedBlockComponent"] {
     figure.element.element-atom,
     figure.interactive.interactive-atom.interactive--loading {
       padding: 0 !important;
+    }
+  }
+
+  .article--standard .element.element-atom + p::first-letter {
+    font-size: 112px;
+  }
+  .element.element-embed iframe {
+    min-height: 62px;
+  }
+
+  blockquote {
+    p {
+      font-size: 20px;
     }
   }
 }
