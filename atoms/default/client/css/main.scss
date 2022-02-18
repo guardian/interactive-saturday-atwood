@@ -19,9 +19,10 @@
 // }
 
 $headerHeight: 80vh;
+$headerMinHeight: 400px;
 $primaryColor: #0f1629;
 $secondaryColor: #f79e1b;
-$cultureColor: #a1845c;
+$cultureColor: #866d50;
 
 .element.element-atom {
   padding: 0;
@@ -74,6 +75,11 @@ $cultureColor: #a1845c;
 }
 
 article.content--interactive {
+  .meta__social {
+    a span {
+      fill: $cultureColor;
+    }
+  }
   & > div {
     border-left: none;
     border-right: none;
@@ -84,6 +90,7 @@ article.content--interactive {
       background-color: $primaryColor;
       width: 100%;
       height: $headerHeight;
+      min-height: $headerMinHeight;
       position: absolute;
       z-index: 2;
     }
@@ -99,6 +106,7 @@ article.content--interactive {
       background-repeat: no-repeat;
       display: block;
       height: $headerHeight;
+      min-height: $headerMinHeight;
       background-position: center;
       margin-top: 0;
       z-index: 3;
@@ -208,6 +216,10 @@ article.content--interactive {
       top: -10px;
       left: -142px;
       background-image: url("<%= path %>/playing-with-fire-desktop.svg");
+      width: 360px;
+      height: 240px;
+      top: 0px;
+      left: -122px;
     }
   }
   h1 {
@@ -394,6 +406,7 @@ p + .element [name="EmbedBlockComponent"] {
       background-repeat: no-repeat;
       display: block;
       height: $headerHeight;
+      min-height: $headerMinHeight;
       background-position: center;
       margin-top: 0;
       z-index: 3;
@@ -475,6 +488,7 @@ p + .element [name="EmbedBlockComponent"] {
         background-color: $primaryColor;
         width: 100%;
         height: $headerHeight;
+        min-height: $headerMinHeight;
         position: absolute;
         z-index: 2;
       }
